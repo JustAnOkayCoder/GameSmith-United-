@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../../../../TowerDefense"
+		}
+	],
+	"settings": {
+		"dotnet.defaultSolution": "For_Fun.sln"
+	}
+}
