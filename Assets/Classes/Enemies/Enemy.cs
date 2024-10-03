@@ -13,6 +13,6 @@ public class Enemy : MonoBehaviour
     public void Init()
     {
         Health = MaxHealth;
-    } 
+    } //new line
     
 }
