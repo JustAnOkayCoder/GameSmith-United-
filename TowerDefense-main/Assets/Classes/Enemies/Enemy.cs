@@ -9,9 +9,13 @@ public class Enemy : MonoBehaviour
    public float Speed;
    public int ID;
 
+   public int NodeIndex; // this is for enemy movement so it follows our path
+
 
    public void Init()
    {
         Health = MaxHealth;
+        transform.position = GameLoopManager.NodePositions[0];
+        NodeIndex = 0;
    }
 }

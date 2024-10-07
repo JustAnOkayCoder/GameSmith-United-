@@ -6,10 +6,13 @@ public class EntitySummoner : MonoBehaviour
 {
     public static Dictionary<int, GameObject> EnemyPrefabs;// used with EnemySummonerData
     public static Dictionary<int, Queue<Enemy>> EnemyObjectPools;//different enemy types from the pools 
+    public static List<Transform> EnemiesInGameTransform; //enemy movement
 
     public static List<Enemy> EnemiesInGame;// keeps track of the enemies alive on the board
 
     private static bool IsInitialized;
+
+    
 
     // Start is called before the first frame update
     public static void Init()
@@ -19,7 +22,7 @@ public class EntitySummoner : MonoBehaviour
             EnemyPrefabs = new Dictionary<int, GameObject>();
             EnemyObjectPools = new Dictionary<int, Queue<Enemy>>();
             EnemiesInGame = new List<Enemy>();
-
+            EnemiesInGameTransform = new List<Transform>();
             EnemySummonData[] Enemies = Resources.LoadAll<EnemySummonData>("Enemies");//this goes to the part in project where the resources are for enemies
             
             foreach(EnemySummonData enemy in Enemies)
@@ -57,7 +60,7 @@ public class EntitySummoner : MonoBehaviour
             else
             {
                 //instantiate new instance of enemy and initialize
-                GameObject NewEnemy = Instantiate(EnemyPrefabs[EnemyID], Vector3.zero, Quaternion.identity);
+                GameObject NewEnemy = Instantiate(EnemyPrefabs[EnemyID], GameLoopManager.NodePositions[0], Quaternion.identity);
                 SummonedEnemy = NewEnemy.GetComponent<Enemy>();
                 SummonedEnemy.Init();
             }
@@ -68,6 +71,7 @@ public class EntitySummoner : MonoBehaviour
             return null;
         }//checks to see if we have that enemy 
 
+        EnemiesInGameTransform.Add(SummonedEnemy.transform);
         EnemiesInGame.Add(SummonedEnemy);
         SummonedEnemy.ID = EnemyID;
         return SummonedEnemy;
@@ -78,5 +82,6 @@ public class EntitySummoner : MonoBehaviour
         EnemyObjectPools[EnemyToRemove.ID].Enqueue(EnemyToRemove);
         EnemyToRemove.gameObject.SetActive(false);
         EnemiesInGame.Remove(EnemyToRemove);
+        EnemiesInGameTransform.Remove(EnemyToRemove.transform);
     }//basically saves enemy for later
 }

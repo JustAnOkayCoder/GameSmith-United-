@@ -1019,6 +1019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoopShouldEnd: 0
+  NodeParent: {fileID: 631172694}
 --- !u!4 &648369002
 Transform:
   m_ObjectHideFlags: 0
