@@ -1,0 +1,44 @@
+using UnityEngine;
+using UnityEngine.SceneManagement; 
+using UnityEngine.UI; 
+
+public class PauseMenu : MonoBehaviour {
+    public GameObject pauseMenuUI;  
+    public static bool isPaused = false;  
+
+    void Update() {
+        //Check if the player presses the Escape key to toggle pause
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (isPaused) {
+                Resume();  // If the game is paused, resume
+            }
+            else {
+                Pause();  // If not paused, pause the game
+            }
+        }
+    }
+
+    
+    public void Resume() {
+        pauseMenuUI.SetActive(false);  //Hide the pause menu
+        Time.timeScale = 1f;  
+        isPaused = false;
+    }
+
+    void Pause() {
+        pauseMenuUI.SetActive(true);  //Show the pause menu
+        Time.timeScale = 0f;  
+        isPaused = true;
+    }
+
+   
+    public void Restart() {
+        Time.timeScale = 1f;  
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);  //Reload current scene
+    }
+
+    
+    public void QuitGame() {
+        Application.Quit();
+    }
+}
