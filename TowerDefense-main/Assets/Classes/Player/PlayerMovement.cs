@@ -77,13 +77,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveCamera()
     {
-        // Rotate the camera based on mouse input
+        if(Input.GetMouseButton(1))
+        {
+            // Rotate the camera based on mouse input
         xRot -= PlayerMouseInput.y * Sensitivity;
         xRot = Mathf.Clamp(xRot, -90f, 90f); // Clamps vertical rotation
 
         // Apply rotation to player and camera
         transform.Rotate(0f, PlayerMouseInput.x * Sensitivity, 0f);
         PlayerCamera.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
-
+        }    // 1 means a right click 0 means a left click on the mouse
     }
 }
