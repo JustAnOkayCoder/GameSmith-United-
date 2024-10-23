@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CanPlace
   - CantPlace
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - Towers
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - DamageVolume
   - 
   - 
   - 

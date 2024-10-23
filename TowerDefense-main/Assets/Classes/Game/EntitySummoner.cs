@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EntitySummoner : MonoBehaviour
 {
+    public static Dictionary<Transform, Enemy> EnemyTransformPairs;//Gets rid of all the gets in the missile damage class
     public static Dictionary<int, GameObject> EnemyPrefabs;// used with EnemySummonerData
     public static Dictionary<int, Queue<Enemy>> EnemyObjectPools;//different enemy types from the pools 
     public static List<Transform> EnemiesInGameTransform; //enemy movement
@@ -19,6 +20,7 @@ public class EntitySummoner : MonoBehaviour
     {
         if(!IsInitialized)
         {
+            EnemyTransformPairs = new Dictionary<Transform, Enemy>();
             EnemyPrefabs = new Dictionary<int, GameObject>();
             EnemyObjectPools = new Dictionary<int, Queue<Enemy>>();
             EnemiesInGame = new List<Enemy>();
@@ -71,8 +73,10 @@ public class EntitySummoner : MonoBehaviour
             return null;
         }//checks to see if we have that enemy 
 
-        EnemiesInGameTransform.Add(SummonedEnemy.transform);
-        EnemiesInGame.Add(SummonedEnemy);
+        if(!EnemiesInGame.Contains(SummonedEnemy)) EnemiesInGame.Add(SummonedEnemy);
+        if(!EnemiesInGameTransform.Contains(SummonedEnemy.transform))EnemiesInGameTransform.Add(SummonedEnemy.transform);
+        if(!EnemyTransformPairs.ContainsKey(SummonedEnemy.transform)) EnemyTransformPairs.Add(SummonedEnemy.transform, SummonedEnemy);
+        //gets rid of the duplicates in our list
         SummonedEnemy.ID = EnemyID;
         return SummonedEnemy;
     }
@@ -81,6 +85,8 @@ public class EntitySummoner : MonoBehaviour
     {
         EnemyObjectPools[EnemyToRemove.ID].Enqueue(EnemyToRemove);
         EnemyToRemove.gameObject.SetActive(false);
+
+        EnemyTransformPairs.Remove(EnemyToRemove.transform);
         EnemiesInGame.Remove(EnemyToRemove);
         EnemiesInGameTransform.Remove(EnemyToRemove.transform);
     }//basically saves enemy for later

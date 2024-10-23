@@ -7,7 +7,9 @@ public class TowerPlacement : MonoBehaviour
 {
     [SerializeField] private LayerMask PlacementCheckMask;
     [SerializeField] private LayerMask PlacementCollideMask;
+    [SerializeField] private PlayerStats PlayerStatistics;
     [SerializeField] private Camera PlayerCamera;
+    
     private GameObject CurrentPlacingTower;
     
     // To avoid placing on the player or any unwanted objects, we add a layer mask to ignore the player
@@ -35,25 +37,34 @@ public class TowerPlacement : MonoBehaviour
                 CurrentPlacingTower.transform.rotation = Quaternion.FromToRotation(Vector3.up, HitInfo.normal);
             }
 
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Destroy(CurrentPlacingTower);
+                CurrentPlacingTower = null;
+                return;
+            }
+
             // Place the tower when left mouse button is clicked
             if (Input.GetMouseButtonDown(0) && HitInfo.collider != null)
             {
                 if (!HitInfo.collider.CompareTag("CantPlace"))
                 {
                     BoxCollider TowerCollider = CurrentPlacingTower.GetComponent<BoxCollider>();
+                    TowerCollider.isTrigger = true;
 
-                    if (TowerCollider != null)
-                    {
-                        TowerCollider.isTrigger = true;
-                        Vector3 BoxCenter = CurrentPlacingTower.transform.position + TowerCollider.center;
-                        Vector3 HalfExtents = TowerCollider.size / 2;
+                    Vector3 Center = CurrentPlacingTower.transform.position + TowerCollider.center;
+                    Vector3 HalfExtents = TowerCollider.size / 2f;
 
                         // Check if there's space to place the tower (this also ignores triggers to avoid false collisions)
-                        if (!Physics.CheckBox(BoxCenter, HalfExtents, Quaternion.identity, PlacementCheckMask, QueryTriggerInteraction.Ignore))
+                        if (!Physics.CheckBox(Center, HalfExtents, Quaternion.identity, PlacementCheckMask, QueryTriggerInteraction.Ignore))
                         {
-                            // Finalize placement
+                            TowerBehaviour CurrentTowerBehaviour =CurrentPlacingTower.GetComponent<TowerBehaviour>();
+                            GameLoopManager.TowersInGame.Add(CurrentTowerBehaviour);
+
+                            PlayerStatistics.AddMoney(-CurrentTowerBehaviour.SummonCost);
+
                             TowerCollider.isTrigger = false;
-                            //CurrentPlacingTower = null;  // Reset after placement
+                            CurrentPlacingTower = null;  // Reset after placement
                         }
                     }
                     else
@@ -63,13 +74,22 @@ public class TowerPlacement : MonoBehaviour
                 }
             }
         }
-    }
+    
 
     // Method to set the tower to place
     public void SetTowerToPlace(GameObject tower)
     {
-        // Instantiate the tower at a temporary location, or where desired
-        CurrentPlacingTower = Instantiate(tower, Vector3.zero, Quaternion.identity);
+        int TowerSummonCost = tower.GetComponent<TowerBehaviour>().SummonCost;
+        
+        if(PlayerStatistics.GetMoney() >= TowerSummonCost)
+        {
+            CurrentPlacingTower = Instantiate(tower, Vector3.zero, Quaternion.identity);
+           
+        }
+        else
+        {
+            Debug.Log("You need more money to build " + tower.name);
+        }
     }
 
     
