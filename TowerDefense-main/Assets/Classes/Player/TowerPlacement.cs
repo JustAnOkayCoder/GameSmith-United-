@@ -25,16 +25,16 @@ public class TowerPlacement : MonoBehaviour
         {
             // Cast a ray from the camera towards where the mouse is pointing
             Ray camray = PlayerCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit HitInfo;
+            //RaycastHit hitInfo;
 
             // Only check collisions on valid placement layers, ignoring the player layer
-            if (Physics.Raycast(camray, out HitInfo, 100f, PlacementCollideMask & ~IgnorePlayerMask))
+            if (Physics.Raycast(camray, out RaycastHit hitInfo, 100f, PlacementCollideMask & ~IgnorePlayerMask))
             {
                 // Update the tower position to where the ray hits the surface
-                CurrentPlacingTower.transform.position = HitInfo.point;
+                CurrentPlacingTower.transform.position = hitInfo.point;
 
                 // Rotate the tower to match the surface's angle, if necessary
-                CurrentPlacingTower.transform.rotation = Quaternion.FromToRotation(Vector3.up, HitInfo.normal);
+                CurrentPlacingTower.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
             }
 
             if (Input.GetKeyDown(KeyCode.Q))
@@ -45,9 +45,9 @@ public class TowerPlacement : MonoBehaviour
             }
 
             // Place the tower when left mouse button is clicked
-            if (Input.GetMouseButtonDown(0) && HitInfo.collider != null)
+            if (Input.GetMouseButtonDown(0) && hitInfo.collider != null)
             {
-                if (!HitInfo.collider.CompareTag("CantPlace"))
+                if (!hitInfo.collider.CompareTag("CantPlace"))
                 {
                     BoxCollider TowerCollider = CurrentPlacingTower.GetComponent<BoxCollider>();
                     TowerCollider.isTrigger = true;

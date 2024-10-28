@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8648284361037348723}
   - component: {fileID: 2009578919222198834}
   - component: {fileID: 4499150635879892482}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MissileTower
   m_TagString: CantPlace
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6462192553112882731}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.1993, y: 16.733444, z: 4.1108394}
+  m_LocalPosition: {x: 1, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -94,9 +94,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemiesLayer:
     serializedVersion: 2
-    m_Bits: 0
-  MissileSystem: {fileID: 0}
-  TowerHead: {fileID: 0}
+    m_Bits: 64
+  MissileSystem: {fileID: 4408575282503966482}
+  TowerHead: {fileID: 13653649619333719}
   Damage: 0
 --- !u!1 &7135909524817704211
 GameObject:
@@ -107,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4097667690409773558}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HeadPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,6 +198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerHead(Explosives)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d0a54341ca0828545aa759434c76b886, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -222,6 +226,10 @@ PrefabInstance:
     - target: {fileID: 1204896475304053468, guid: 15bb3b9f50cfa6149a4db97303abbb7d, type: 3}
       propertyPath: m_Name
       value: Missile
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204896475304053468, guid: 15bb3b9f50cfa6149a4db97303abbb7d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6346178433994488895, guid: 15bb3b9f50cfa6149a4db97303abbb7d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -268,6 +276,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15bb3b9f50cfa6149a4db97303abbb7d, type: 3}
+--- !u!198 &4408575282503966482 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4236064142587593492, guid: 15bb3b9f50cfa6149a4db97303abbb7d, type: 3}
+  m_PrefabInstance: {fileID: 569672610171018246}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6914650033635663929 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6346178433994488895, guid: 15bb3b9f50cfa6149a4db97303abbb7d, type: 3}
@@ -336,6 +349,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: db75b2852f945af499ed2f5ba32787a7, type: 3}
       propertyPath: m_Name
       value: TowerStand
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: db75b2852f945af499ed2f5ba32787a7, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

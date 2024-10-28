@@ -29,9 +29,15 @@ public class TowerTargeting
 
         for(int i = 0; i < EnemiesToCalculate.Length; i++)
         {
-            Enemy CurrentEnemy = EnemiesInRange[i].transform.parent.GetComponent<Enemy>();
-            int EnemyIndexInList = EntitySummoner.EnemiesInGame.FindIndex(x => x == CurrentEnemy);
-            EnemiesToCalculate[i] = new EnemyData(CurrentEnemy.transform.position, CurrentEnemy.NodeIndex, CurrentEnemy.Health,EnemyIndexInList);
+           Enemy CurrentEnemy = EnemiesInRange[i].transform.parent?.GetComponent<Enemy>();
+                if (CurrentEnemy == null) 
+                {
+                // Skip this enemy if it doesn't have the Enemy component
+                continue;
+                }   
+
+                int EnemyIndexInList = EntitySummoner.EnemiesInGame.FindIndex(x => x == CurrentEnemy);
+                EnemiesToCalculate[i] = new EnemyData(CurrentEnemy.transform.position, CurrentEnemy.NodeIndex, CurrentEnemy.Health, EnemyIndexInList);
         }
 
         SearchForEnemy EnemySearchJob = new SearchForEnemy

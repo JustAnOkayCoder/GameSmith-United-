@@ -54,9 +54,9 @@ MonoBehaviour:
   Target: {fileID: 0}
   TowerPivot: {fileID: 6092532772095165592}
   SummonCost: 100
-  Damage: 1
+  Damage: 0
   Firerate: 5
-  Range: 5
+  Range: 10
   Delay: 0
 --- !u!65 &-516713827940154071
 BoxCollider:
