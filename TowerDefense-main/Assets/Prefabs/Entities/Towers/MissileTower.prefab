@@ -76,7 +76,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   TowerPivot: {fileID: 4097667690409773558}
   SummonCost: 250
-  Damage: 3
+  Damage: 10
   Firerate: 1
   Range: 10
   Delay: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
     m_Bits: 64
   MissileSystem: {fileID: 4408575282503966482}
   TowerHead: {fileID: 13653649619333719}
-  Damage: 0
+  Damage: 10
 --- !u!1 &7135909524817704211
 GameObject:
   m_ObjectHideFlags: 0

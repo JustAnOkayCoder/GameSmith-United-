@@ -54,7 +54,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   TowerPivot: {fileID: 6092532772095165592}
   SummonCost: 100
-  Damage: 0
+  Damage: 2
   Firerate: 5
   Range: 10
   Delay: 0

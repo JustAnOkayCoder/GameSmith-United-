@@ -8,11 +8,21 @@ public class FireTriggerManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Effect FlameEffect = new Effect("Fire", BaseClass.Firerate, BaseClass.Damage, 5f); //makes our fire damage last for 5 seconds
-            ApplyEffectData effectData = new ApplyEffectData(EntitySummoner.EnemyTransformPairs[other.transform.parent], FlameEffect);
-            GameLoopManager.EnqueueEffectToApply(effectData);
+            Transform enemyTransform = other.transform; // Directly get the enemy's transform
+
+            // Check if the enemy or its parent is in the dictionary
+            if (EntitySummoner.EnemyTransformPairs.ContainsKey(enemyTransform))
+            {
+                Effect FlameEffect = new Effect("Fire", BaseClass.Firerate, BaseClass.Damage, 5f); //makes our fire damage last for 5 seconds
+                ApplyEffectData effectData = new ApplyEffectData(EntitySummoner.EnemyTransformPairs[enemyTransform], FlameEffect);
+                GameLoopManager.EnqueueEffectToApply(effectData);
+            }
+            else
+            {
+                Debug.LogWarning("The enemy transform is not found in the EnemyTransformPairs dictionary.");
+            }
         }
     }
 }
