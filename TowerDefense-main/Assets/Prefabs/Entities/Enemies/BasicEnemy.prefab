@@ -54,7 +54,7 @@ MonoBehaviour:
   Health: 0
   Speed: 4
   ID: 0
-  RootPart: {fileID: 6415436267391070399, guid: d737ce2922b8cfd4bbdc4dcb44fb09b2, type: 3}
+  RootPart: {fileID: 8508122769863327070}
   NodeIndex: 0
 --- !u!65 &4362422071664744244
 BoxCollider:
