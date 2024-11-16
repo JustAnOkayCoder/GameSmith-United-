@@ -6,15 +6,16 @@ TagManager:
   tags:
   - CanPlace
   - CantPlace
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Towers
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - DamageVolume
   - 
   - 
   - 
