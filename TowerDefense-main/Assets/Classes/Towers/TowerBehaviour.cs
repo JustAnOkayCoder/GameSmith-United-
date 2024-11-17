@@ -21,8 +21,8 @@ public class TowerBehaviour : MonoBehaviour
     void Start()
     {
         CurrentDamageMethodClass = GetComponent<IDamageMethod>();
-        
-        if(CurrentDamageMethodClass == null)
+
+        if (CurrentDamageMethodClass == null)
         {
             Debug.LogError("TOWERS No damage class attached to given tower");
         }
@@ -38,20 +38,43 @@ public class TowerBehaviour : MonoBehaviour
     // Update is called once per frame
     public void Tick()
     {
-       CurrentDamageMethodClass.DamageTick(Target);
+        CurrentDamageMethodClass.DamageTick(Target);
 
-       if(Target != null)
-       {
-        TowerPivot.transform.rotation = Quaternion.LookRotation(Target.transform.position - transform.position);
-       }
+        if (Target != null)
+        {
+            TowerPivot.transform.rotation = Quaternion.LookRotation(Target.transform.position - transform.position);
+        }
     }
 
     private void OnDrawGizmos()
     {
-        if(Target != null)
+        if (Target != null)
         {
             Gizmos.DrawWireSphere(transform.position, Range);
             Gizmos.DrawLine(TowerPivot.position, Target.transform.position);
+
         }
+
     }
+    public int UpgradeCost;
+    public int UpgradeLevel = 0;
+    public int MaxUpgradeLevel = 3;
+
+    public void Upgrade()
+    {
+        if (UpgradeLevel < MaxUpgradeLevel)
+        {
+            UpgradeLevel++;
+            Damage += 10;
+            Range += 2f;
+            UpgradeCost += 50;
+        }
+        else
+        {
+            Debug.Log("Tower is already at max upgrade level.");
+
+        }
+
+    }
+
 }
