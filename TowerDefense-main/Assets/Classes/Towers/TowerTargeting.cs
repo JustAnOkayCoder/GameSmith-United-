@@ -177,7 +177,7 @@ public class TowerTargeting
 
                     break;
 
-                case 4:
+                case 4: //weak
 
                      if (_EnemiesToCalculate[index].Health < CompareValue)
                     {
