@@ -13,15 +13,13 @@ public class StandardDamage : MonoBehaviour, IDamageMethod
     private float Damage;
     private float Firerate;
     private float Delay;
-    private float upgradecost;
 
-    public void Init(float Damage, float Firerate)
+   public void Init(float Damage, float Firerate)
    {
         this.Damage = Damage;
         this.Firerate = Firerate;
         Delay = 1f / Firerate;
-        this.upgradecost = 50;
-    }// stops you from having to recall damage changes
+   }// stops you from having to recall damage changes
 
    public void DamageTick(Enemy Target)
    {
@@ -37,9 +35,6 @@ public class StandardDamage : MonoBehaviour, IDamageMethod
 
             Delay = 1f / Firerate;
 
-            Firerate += 2;
-            Damage += 2;
-            upgradecost += 50;
         }
    }
 }

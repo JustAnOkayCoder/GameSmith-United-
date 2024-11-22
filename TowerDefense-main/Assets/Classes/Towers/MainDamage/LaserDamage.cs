@@ -10,15 +10,13 @@ public class LaserDamage : MonoBehaviour, IDamageMethod
    private float Damage;
    private float Firerate;
    private float Delay;
-    private float upgradecost;
 
-    public void Init(float Damage, float Firerate)
+   public void Init(float Damage, float Firerate)
    {
     this.Damage = Damage;
     this.Firerate = Firerate;
     Delay = 1f / Firerate;
-        this.upgradecost = 150;
-    }
+   }
 
    public void DamageTick(Enemy Target)
    {
@@ -38,9 +36,5 @@ public class LaserDamage : MonoBehaviour, IDamageMethod
         }
 
         LaserRenderer.enabled = false;
-
-        Firerate += 1;
-        Damage += 2;
-        upgradecost += 200;
-    }
+   }
 }
