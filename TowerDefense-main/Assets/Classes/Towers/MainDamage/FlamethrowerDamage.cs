@@ -8,11 +8,14 @@ public class FlamethrowerDamage : MonoBehaviour, IDamageMethod
     [SerializeField] private ParticleSystem FireEffect;
     [HideInInspector] public float Damage;
     [HideInInspector] public float Firerate;
+    [HideInInspector] public float upgradeCost;
+
 
     public void Init(float Damage, float Firerate)
     {
         this.Damage = Damage;
         this.Firerate = Firerate;
+        this.upgradeCost = 50;
     }
 
     public void DamageTick(Enemy Target)
@@ -26,4 +29,11 @@ public class FlamethrowerDamage : MonoBehaviour, IDamageMethod
         }
         FireEffect.Stop();
     }
+    public void upgradeTower()
+    {
+        Firerate += 1;
+        Damage += 2;
+        upgradeCost += 150;
+    }
+
 }

@@ -12,12 +12,14 @@ public class MissileDamage : MonoBehaviour, IDamageMethod
     public float Damage;
     private float Firerate;
     private float Delay;
-
+    private float upgradecost;
+    
    public void Init(float Damage, float Firerate)
    {
         MissileSystemMain = MissileSystem.main;
         this.Damage = Damage;
         this.Firerate = Firerate;
+        this.upgradecost = 100;
         Delay = 1f / Firerate;
    }// stops you from having to recall damage changes
 
@@ -37,6 +39,10 @@ public class MissileDamage : MonoBehaviour, IDamageMethod
 
             MissileSystem.Play();
             Delay = 1f / Firerate;
+
+            Firerate += 1;
+            Damage += 2;
+            upgradecost += 100;
 
         }
    }
