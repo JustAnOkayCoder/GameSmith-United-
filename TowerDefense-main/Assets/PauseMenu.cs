@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+
 
 public class PauseMenu : MonoBehaviour
 {
@@ -55,4 +58,6 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Quitting game..");
         Application.Quit();
     }
+
+
 }
