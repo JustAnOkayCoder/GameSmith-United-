@@ -2968,6 +2968,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796759921}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< HEAD
 --- !u!1001 &827577298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3045,6 +3046,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f14a3e7c896c93447ab4c3819197a4fc, type: 3}
+=======
+>>>>>>> parent of 0796627 (audio manager)
 --- !u!1 &867012073
 GameObject:
   m_ObjectHideFlags: 0
@@ -4239,6 +4242,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+<<<<<<< HEAD
 --- !u!1 &1301452903
 GameObject:
   m_ObjectHideFlags: 0
@@ -4275,6 +4279,8 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+=======
+>>>>>>> parent of 0796627 (audio manager)
 --- !u!1 &1347905519
 GameObject:
   m_ObjectHideFlags: 0
@@ -7440,7 +7446,10 @@ SceneRoots:
   - {fileID: 148879621}
   - {fileID: 963659207}
   - {fileID: 628811766}
+<<<<<<< HEAD
   - {fileID: 1855489967}
   - {fileID: 213870998}
   - {fileID: 679467423}
   - {fileID: 827577298}
+=======
+>>>>>>> parent of 0796627 (audio manager)
