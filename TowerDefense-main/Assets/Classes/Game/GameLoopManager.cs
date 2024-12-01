@@ -23,6 +23,19 @@ public class GameLoopManager : MonoBehaviour
     public static Vector3[] NodePositions; //positions of our nodes on the board
     public Transform NodeParent;
 
+    // Wave System all added code will have a WS some how added to it 
+    // incase it messes up our loop or something we will be able to find it easier.
+
+    //WS variables
+
+    public int totalWaves = 3; // change this for win case
+    public int currentWave = 0; // should track waves
+    public int enemiesPerWave = 5; // enemies per wave
+    public float timeBetweenWaves = 10f; // should be 10 seconds
+    private bool waveInProgress = false; // is there a current wave
+
+    public GameObject victoryScreen;
+
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +80,11 @@ public class GameLoopManager : MonoBehaviour
    {
     while(LoopShouldEnd == false)
     {
+        //WS if the wave ends start a new one
+        if (!waveInProgress && EntitySummoner.EnemiesInGame.Count == 0)
+        {
+            StartWave();
+        }
         //Spawn Enemies 
         if(EnemyIDsToSummon.Count > 0)
         {
@@ -184,11 +202,60 @@ public class GameLoopManager : MonoBehaviour
             }
         }
 
+        // WS check for the win
+        CheckForWinCondition();
+
         //Remove Towers
 
         yield return null;
     }
    }
+
+   //WS start wave
+   void StartWave()
+   {
+    if (currentWave < totalWaves)
+    {
+        currentWave++;
+        StartCoroutine(SpawnWave(enemiesPerWave));
+    }
+   }
+
+   //WS enemies spawning in waves
+
+   IEnumerator SpawnWave(int numberOfEnemies)
+   {
+    waveInProgress = true;
+    for (int i = 0; i < numberOfEnemies; i++)
+    {
+        EnqueueEnemyIDToSummon(1);//type of enemy to spawn
+        yield return new WaitForSeconds(1f); // should be delay between spawns
+    }
+    waveInProgress = false;
+   }
+
+   //WS did you win
+
+   void CheckForWinCondition()
+   {
+    if (currentWave >= totalWaves && EntitySummoner.EnemiesInGame.Count == 0)
+    {
+        Victory();
+    }
+   }
+
+   //WS Victory
+
+   void Victory()
+   {
+    Debug.Log("Victory! You have beaten all of the waves");
+    if (victoryScreen != null)
+    {
+        victoryScreen.SetActive(true); // this should display the you won UI
+    }
+    Time.timeScale = 0; // should pause the game I think
+   }
+
 
    public static void EnqueueEffectToApply(ApplyEffectData effectData)
    {
