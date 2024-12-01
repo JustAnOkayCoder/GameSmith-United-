@@ -5,6 +5,7 @@ using Unity.Collections; // For NativeArray, Allocator
 using Unity.Jobs;        // For JobHandle, IJobParallelForTransform
 using UnityEngine.Jobs;
 using UnityEditor;  // For TransformAccessArray
+using TMPro;
 
 
 
@@ -34,7 +35,8 @@ public class GameLoopManager : MonoBehaviour
     public float timeBetweenWaves = 10f; // should be 10 seconds
     private bool waveInProgress = false; // is there a current wave
 
-    public GameObject victoryScreen;
+    public GameObject victoryScreen;// you win screen
+    public TMP_Text waveCounterText;// the wave counter on screen
 
 
     // Start is called before the first frame update
@@ -63,18 +65,22 @@ public class GameLoopManager : MonoBehaviour
         {
             NodeDistances[i] = Vector3.Distance(NodePositions[i], NodePositions[i+1]);
         }
-
+        UpdateWaveCounter();// updates the counter on screen
         StartCoroutine(GameLoop());
-        InvokeRepeating("SummonTest", 0f, 1f);
+        
         
     }
-
+    //Wave Counter
+    void UpdateWaveCounter()
+    {
+        if (waveCounterText != null)
+        {
+            waveCounterText.text = $"Wave: {currentWave}/{totalWaves}";
+        }
+    }
    
 
-    void SummonTest()
-    {
-        EnqueueEnemyIDToSummon(1);
-    }
+    
 
    IEnumerator GameLoop()
    {
@@ -217,6 +223,7 @@ public class GameLoopManager : MonoBehaviour
     if (currentWave < totalWaves)
     {
         currentWave++;
+        UpdateWaveCounter(); //update at the start of a wave
         StartCoroutine(SpawnWave(enemiesPerWave));
     }
    }
