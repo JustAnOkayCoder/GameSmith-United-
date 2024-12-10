@@ -80,14 +80,25 @@ public class EntitySummoner : MonoBehaviour
         SummonedEnemy.ID = EnemyID;
         return SummonedEnemy;
     }
-    
+
     public static void RemoveEnemy(Enemy EnemyToRemove)
     {
-        EnemyObjectPools[EnemyToRemove.ID].Enqueue(EnemyToRemove);
-        EnemyToRemove.gameObject.SetActive(false);
+        if (EnemyToRemove != null)
+        {
+            if (EnemyObjectPools.ContainsKey(EnemyToRemove.ID))
+            {
+                EnemyObjectPools[EnemyToRemove.ID].Enqueue(EnemyToRemove);
+                EnemyToRemove.gameObject.SetActive(false);
 
-        EnemyTransformPairs.Remove(EnemyToRemove.transform);
-        EnemiesInGame.Remove(EnemyToRemove);
-        EnemiesInGameTransform.Remove(EnemyToRemove.transform);
-    }//basically saves enemy for later
+                if (EnemyTransformPairs.ContainsKey(EnemyToRemove.transform))
+                    EnemyTransformPairs.Remove(EnemyToRemove.transform);
+
+                if (EnemiesInGame.Contains(EnemyToRemove))
+                    EnemiesInGame.Remove(EnemyToRemove);
+
+                if (EnemiesInGameTransform.Contains(EnemyToRemove.transform))
+                    EnemiesInGameTransform.Remove(EnemyToRemove.transform);
+            }
+        }
+    }
 }
